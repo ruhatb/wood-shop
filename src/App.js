@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { BrowserRouter as Router,  createBrowserRouter, RouterProvider} from "react-router-dom";
+
+import { About,Cart,Orders,Homepage,Error,Landing,Products,SingleProduct,Register,Checkout,Login } from "./pages";
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Homepage />,
+    errorElement: <Error />,
+    children: [
+      {
+        index: true,
+        element: <Landing />,
+      },
+      {
+        path: "products",
+        element: <Products />,
+      },
+      {
+        path: "products/:id", // :id şeklinde parametre kullanımı
+        element: <SingleProduct />,
+      },
+      {
+        path: "carts",
+        element: <Cart />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
+      },
+      {
+        path: "orders",
+        element: <Orders />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+    errorElement: <Error />,
+  },
+]);
+
+
+const App = () => {
+  return <RouterProvider router={router} />
+  
 }
 
 export default App;
