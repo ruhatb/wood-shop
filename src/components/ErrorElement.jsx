@@ -1,11 +1,17 @@
 import React from 'react'
 
+import { useRouteError } from 'react-router-dom';
 
 const ErrorElement = () => {
+
+  const error = useRouteError();
+
+
   return (
-    <div>
+    <h3 className='font-bold text-4xkl'>
+      There was an error.. !
       
-    </div>
+    </h3>
   )
 }
 
