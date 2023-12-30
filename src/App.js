@@ -1,15 +1,31 @@
 import React from "react";
 
-import { BrowserRouter as Router,  createBrowserRouter, RouterProvider} from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
-import { About,Cart,Orders,Homepage,Error,Landing,Products,SingleProduct,Register,Checkout,Login } from "./pages";
+import {
+  About,
+  Cart,
+  Orders,
+  Homepage,
+  Error,
+  Landing,
+  Products,
+  SingleProduct,
+  Register,
+  Checkout,
+  Login,
+} from "./pages";
 
 import { ErrorElement } from "./components";
 
 //loader
-import {loader as landingLoader}  from "./pages/Landing";
-//actions 
-
+import { loader as landingLoader } from "./pages/Landing";
+import { loader as singleProductLoader } from "./pages/SingleProduct";
+//actions
 
 const router = createBrowserRouter([
   {
@@ -28,8 +44,10 @@ const router = createBrowserRouter([
         element: <Products />,
       },
       {
-        path: "products/:id", // :id şeklinde parametre kullanımı
+        path: "products/:id",
         element: <SingleProduct />,
+        errorElement: <ErrorElement />,
+        loader: singleProductLoader,
       },
       {
         path: "cart",
@@ -61,10 +79,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-
 const App = () => {
-  return <RouterProvider router={router} />
-  
-}
+  return <RouterProvider router={router} />;
+};
 
 export default App;
