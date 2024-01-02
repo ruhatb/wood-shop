@@ -1,8 +1,22 @@
-const Products = () => {
-    return (
-        <div>
-         <h1> Products </h1> 
-        </div> ) 
-        };
+import { Filters, PageonContainer, ProductsContainer } from "../components";
+import { customFetch } from "../utils";
 
-        export default Products;
+const url = "/products";
+export const loader = async ({ Request }) => {
+  const response = await customFetch(url);
+  const products = response.data.data;
+  const meta = response.data.meta;
+  return { products, meta };
+};
+
+const Products = () => {
+  return (
+    <div>
+      <Filters />
+      <ProductsContainer />
+      <PageonContainer />
+    </div>
+  );
+};
+
+export default Products;
